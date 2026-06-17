@@ -1,0 +1,1 @@
+sf api request rest /services/data/v67.0/composite --method POST --body "@./data/create-payment-gateway-request.json"

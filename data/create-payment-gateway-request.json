@@ -1,0 +1,27 @@
+{
+    "allOrNone":true,
+    "compositeRequest":[
+        {
+            "method":"GET",
+            "url":"/services/data/v67.0/query/?q=SELECT+Id+FROM+PaymentGatewayProvider",
+            "referenceId":"refPaymentGatewayProvider"
+        },
+        {
+            "method":"GET",
+            "url":"/services/data/v67.0/query/?q=SELECT+Id+FROM+NamedCredential+WHERE+MasterLabel+=+'Test_NC'",
+            "referenceId":"refNamedCredential"
+        },
+        {
+            "method":"POST",
+            "url":"/services/data/v67.0/sobjects/PaymentGateway",
+            "referenceId":"refPaymentGateway",
+            "body":{
+                "MerchantCredentialId":"@{refNamedCredential.records[0].Id}",
+                "PaymentGatewayName":"TestPaymentGateway",
+                "PaymentGatewayProviderId":"@{refPaymentGatewayProvider.records[0].Id}",
+                "Status":"Active",
+                "ExternalReference":"BASIC_CREDIT"
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v67.0/query/?q=SELECT+Id+FROM+ApexClass+WHERE+Name+=+%27StripeAdapter%27",
+      "referenceId": "refPayeezyAdapter"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v67.0/sobjects/PaymentGatewayProvider",
+      "referenceId": "refPaymentGatewayProvider",
+      "body": {
+        "ApexAdapterId": "@{refPayeezyAdapter.records[0].Id}",
+        "DeveloperName": "TestPaymentGatewayProvider",
+        "MasterLabel": "224_Test_Master_Label"
+      }
+    }
+  ]
+}
